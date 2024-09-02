@@ -1,9 +1,10 @@
 <?php
 
+namespace Core;
+
+use PDO;
 
 // Connect to our MySQL database
-
-
 class Database
 {
     public $connection;

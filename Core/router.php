@@ -1,6 +1,8 @@
 <?php
 
-$routes = require ('routes.php');
+// namespace Core;
+
+$routes = require base_path(('routes.php'));
 $URI = parse_url($_SERVER['REQUEST_URI'])['path'];
 
 // if ($URI === '/') {
@@ -25,7 +27,7 @@ $URI = parse_url($_SERVER['REQUEST_URI'])['path'];
 function routesToController($URI, $routes)
 {
     if (array_key_exists($URI, $routes)) {
-        require $routes[$URI];
+        require base_path($routes[$URI]);
     } else {
         abort();
        
@@ -34,8 +36,8 @@ function routesToController($URI, $routes)
 
 function abort($code = 404){
     http_response_code($code);
-    require "views/{$code}.php";
-    // die();
+    require base_path( "views/{$code}.php");
+    die();
 }
 
 routesToController($URI, $routes);
