@@ -1,6 +1,6 @@
 <?php
 
-$routes = require('routes.php');
+$routes = require ('routes.php');
 $URI = parse_url($_SERVER['REQUEST_URI'])['path'];
 
 // if ($URI === '/') {
@@ -35,7 +35,7 @@ function routesToController($URI, $routes)
 function abort($code = 404){
     http_response_code($code);
     require "views/{$code}.php";
-    die();
+    // die();
 }
 
 routesToController($URI, $routes);

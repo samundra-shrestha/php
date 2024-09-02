@@ -69,7 +69,9 @@ $filteredBooks = array_filter($books, function ($item) {
 });
 
 
-$heading = "Home";
+// $heading = "Home";
 
-
-require view('index.view.php');
+view('index.view.php', [
+    'heading' => 'Home',
+    'filteredBooks' => $filteredBooks
+] );
