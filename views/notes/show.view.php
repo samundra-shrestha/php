@@ -8,11 +8,19 @@
         <h2 class="text-xl mb-5"> <?php echo htmlspecialchars($note['title']) ?></h2>
         <p>
 
-            <?php echo htmlspecialchars($note['body'])?>
+            <?php echo htmlspecialchars($note['body']) ?>
         </p>
-        <p>
-            <a href="/notes" class="mt-10 p-2 flex bg-blue-500 fit-width text-white rounded-md hover:bg-blue-100 text-red " style="width:fit-content"> GO BACK</a>
-        </p>
+        <div class="flex gap-5">
+            <p>
+                <a href="/notes" class="mt-10 p-2 flex bg-blue-500 fit-width text-white rounded-md hover:bg-blue-100 text-red " style="width:fit-content"> GO BACK</a>
+            </p>
+            <form method="POST">
+                <input type="hidden" name="id" value="<?= $note['id'] ?>">
+                <button class="mt-10 p-2 flex bg-red-500 fit-width text-white rounded-md hover:bg-red-300 text-red " style="width:fit-content"> Delete</button>
+            </form>
+        </div>
+
+
     </div>
 </main>
 <?php require base_path('views/partials/footer.php') ?>
