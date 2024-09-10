@@ -15,6 +15,7 @@
                 <a href="/notes" class="mt-10 p-2 flex bg-blue-500 fit-width text-white rounded-md hover:bg-blue-100 text-red " style="width:fit-content"> GO BACK</a>
             </p>
             <form method="POST">
+                <input type="hidden" name="_method" value="DELETE">
                 <input type="hidden" name="id" value="<?= $note['id'] ?>">
                 <button class="mt-10 p-2 flex bg-red-500 fit-width text-white rounded-md hover:bg-red-300 text-red " style="width:fit-content"> Delete</button>
             </form>

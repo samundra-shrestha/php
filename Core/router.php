@@ -1,43 +1,54 @@
 <?php
 
-// namespace Core;
+namespace Core;
 
-$routes = require base_path(('routes.php'));
-$URI = parse_url($_SERVER['REQUEST_URI'])['path'];
-
-// if ($URI === '/') {
-//     require 'controllers/index.php';
-// } 
-// else if ($URI === '/about') {
-//     require 'controllers/about.php';
-// }
-// else if ($URI === '/contact') {
-//     require 'controllers/contact.php';
-// }
-// else{
-//     echo '404 - Page Not Found';
-// }
-
-
-
-
-// dd($_SERVER);
-
-
-function routesToController($URI, $routes)
+class Router
 {
-    if (array_key_exists($URI, $routes)) {
-        require base_path($routes[$URI]);
-    } else {
-        abort();
-       
+    protected  $routes = [];
+
+    function add($method, $uri, $controller)
+    {
+        $this->routes[] = [
+            'uri' => $uri,
+            'controller' => $controller,
+            'method' => $method
+        ];
+    }
+
+    public function get($uri, $controller)
+    {
+        $this->add('GET', $uri, $controller);
+    }
+    public function post($uri, $controller)
+    {
+        $this->add('POST', $uri, $controller);
+    }
+    public function delete($uri, $controller)
+    {
+        $this->add('DELETE', $uri, $controller);
+    }
+    public function patch($uri, $controller)
+    {
+        $this->add('PATCH', $uri, $controller);
+    }
+    public function put($uri, $controller)
+    {
+        $this->add('PUT', $uri, $controller);
+    }
+    public function route($uri, $method)
+    {
+        foreach ($this->routes as $route) {
+            if ($route['uri'] === $uri && $route['method'] === strtoupper($method)) {
+                return require base_path($route['controller']);
+            }
+        }
+        $this->abort();
+    }
+
+    protected function abort($code = 404)
+    {
+        http_response_code($code);
+        require base_path("views/{$code}.php");
+        die();
     }
 }
-
-function abort($code = 404){
-    http_response_code($code);
-    require base_path( "views/{$code}.php");
-    die();
-}
-
-routesToController($URI, $routes);

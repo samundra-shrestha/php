@@ -15,22 +15,12 @@ spl_autoload_register(function ($class) {
     require base_path("{$class}.php");
 });
 
-require base_path('Core/router.php');
+// require base_path('Core/router.php');
+$router = new \Core\Router();
+
+$routes = require base_path(('routes.php'));
+$URI = parse_url($_SERVER['REQUEST_URI'])['path'];
 
 
-// echo 'Hello, World!';
-
-
-
-
-
-
-// $id = $_GET['id'];
-// $query = "SELECT * FROM posts where id = :id";
-// $posts = $db->query($query, [':id' => $id])->fetch();
-
-// // dd($posts);
-
-// foreach ($posts as $post) {
-//     echo "<li>" . $post['title'] . "</li>";
-// }
+$method = $_POST['_method'] ?? $_SERVER['REQUEST_METHOD'];
+$router->route($URI, $method);
