@@ -2,14 +2,13 @@
 
 use Core\Database;
 use Core\Validator;
+use Core\App;
 
 
-// require base_path('Core/Validator.php');
-$config = require base_path('config.php');
-$db = new Database($config['database']);
+
+$db = App::resolve(Database::class);
 
 
-// dd("hello");
 
 $errors = [];
 
