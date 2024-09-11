@@ -19,6 +19,10 @@
                 <input type="hidden" name="id" value="<?= $note['id'] ?>">
                 <button class="mt-10 p-2 flex bg-red-500 fit-width text-white rounded-md hover:bg-red-300 text-red " style="width:fit-content"> Delete</button>
             </form>
+            <p>
+                <a href="/note/edit?id=<?= $note['id'] ?>" class="mt-10 p-2 flex bg-gray-500 fit-width text-white rounded-md hover:bg-gray-400 text-red "> Edit</a>
+            </p>
+
         </div>
 
 
