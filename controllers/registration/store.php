@@ -52,9 +52,8 @@ if ($user) {
     ]);
 
     // mark that the user has logged in .
-    $_SESSION['user'] = [
-        'email' => $email
-    ];
+    login($user);
+
     header('location: /');
     exit();
 }
