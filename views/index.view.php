@@ -4,7 +4,7 @@
 <?php require('partials/banner.php') ?>
 <main>
     <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-        <h2>Welcome TO HomePage</h2>
+        <h2 class="text-green-500 mb-5 text-xl">Hello, <?= $_SESSION['user']['email'] ?? 'Guest' ?></h2>
         <ul>
             <?php foreach ($filteredBooks as $book) : ?>
 
