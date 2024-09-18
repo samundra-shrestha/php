@@ -2,7 +2,8 @@
 
 use Core\App;
 use Core\Database;
-use Core\Validator;
+
+use Http\Forms\LoginForm;
 
 $db = App::resolve(Database::class);
 
@@ -14,20 +15,16 @@ $password = $_POST['password'];
 
 // Validate the form inputs
 
-$errors = [];
+$form = new LoginForm();
 
-if (!Validator::email($email)) {
-    $errors['email'] = 'Please provide a valid email address.';
-}
-if (!Validator::string($password)) {
-    $errors['password'] = 'Please provide a valid password.';
-}
+if (!$form->validate($email, $password)) {
 
-if (!empty($errors)) {
     return view('session/create.view.php', [
-        'errors' => $errors
+        'errors' => $form->errors()
     ]);
 }
+
+
 
 
 // Login the user if the credentials match
@@ -39,11 +36,11 @@ $user = $db->query('SELECT * FROM users WHERE email = :email', [
 ])->find();
 
 if ($user) {
-    if(password_verify($password, $user['password'])){
+    if (password_verify($password, $user['password'])) {
         login([
-            'email'=>$email
+            'email' => $email
         ]);
-    
+
         header('location: /');
         exit();
     }
@@ -58,4 +55,3 @@ return view('session/create.view.php', [
 ]);
 
 // we have a user, but we don't know if the password provided matches what we have in the database.
-
