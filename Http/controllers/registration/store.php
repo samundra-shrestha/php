@@ -3,6 +3,10 @@
 use Core\App;
 use Core\Database;
 use Core\Validator;
+use Core\Authenticator;
+
+
+
 
 $email = $_POST['email'];
 $password = $_POST['password'];
@@ -40,8 +44,7 @@ if ($user) {
 
     //if yes, redirect to login page.
 
-    header('location: /');
-    exit();
+    redirect('/');
 } else {
 
     // If not, save one to the database, and then log the user in, and redirect.
@@ -52,8 +55,7 @@ if ($user) {
     ]);
 
     // mark that the user has logged in .
-    login($user);
 
-    header('location: /');
-    exit();
+    (new Authenticator())->login($user);
+    redirect('/');
 }
