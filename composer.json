@@ -6,11 +6,21 @@
             "email": "samundras41@gmail.com"
         }
     ],
-    "require": {},
+    "require": {
+        "illuminate/collections": "^11.23"
+    },
     "autoload": {
         "psr-4": {
             "Core\\": "Core/",
             "Http\\": "Http/"
+        }
+    },
+    "require-dev": {
+        "pestphp/pest": "^3.2"
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
         }
     }
 }
