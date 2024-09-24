@@ -32,7 +32,7 @@ if (!empty($errors)) {
 $db->query('INSERT INTO notes(title, body, user_id) VALUES( :title, :body, :user_id)', [
     'title' => $_POST['title'],
     'body' => $_POST['body'],
-    'user_id' => 6
+    'user_id' => $_SESSION['user']['id']
 ]);
 
 // $_POST['title'] = '';
