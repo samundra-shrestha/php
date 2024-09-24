@@ -4,7 +4,7 @@ use Core\App;
 use Core\Database;
 use Core\Validator;
 use Core\Authenticator;
-
+use Core\Session;
 
 
 
@@ -43,8 +43,7 @@ if ($user) {
 
 
     //if yes, redirect to login page.
-
-    redirect('/');
+    redirect('/login');
 } else {
 
     // If not, save one to the database, and then log the user in, and redirect.
@@ -56,6 +55,10 @@ if ($user) {
 
     // mark that the user has logged in .
 
-    (new Authenticator())->login($user);
+    $newUser = $db->query('SELECT * FROM users WHERE email = :email', [
+        'email' => $email
+    ])->find();
+
+    (new Authenticator())->login($newUser);
     redirect('/');
 }
