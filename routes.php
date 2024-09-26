@@ -7,8 +7,8 @@ $router->get('/contact', 'contact.php');
 
 
 $router->get('/notes', 'notes/index.php')->only('auth');
-$router->get('/note', 'notes/show.php');
-$router->delete('/note', 'notes/destroy.php');
+$router->get('/note', 'notes/show.php')->only('auth');
+$router->delete('/note', 'notes/destroy.php')->only('auth');
 
 $router->get('/notes/create', 'notes/create.php');
 $router->post('/notes', 'notes/store.php');
